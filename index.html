@@ -811,7 +811,7 @@
                     <label class="layui-form-label">日志类型</label>
                     <div class="layui-input-inline">
                         <select id="logType" name="logType" lay-filter="logTypeSelect">
-                            <option value="bepinex" selected>主程序日志</option>
+                            <option value="bepinex.min" selected>主程序日志</option>
                             <option value="match">匹配日志</option>
                             <option value="skins">皮肤日志</option>
                             <option value="mercenaries">佣兵日志</option>
@@ -977,7 +977,7 @@
             $('#generalContent').hide();
             $('#logsContent').show();
             $('#shortcutKeyContent').hide();
-            $('#logType').val('bepinex')
+            $('#logType').val('bepinex.min')
             form.render(null, 'logForm');
             fetchLogs(true)
         });
