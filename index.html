@@ -72,9 +72,9 @@
         <li class="layui-nav-item layui-this">
             <a href="javascript:;" id="general">HsMod设置</a>
         </li>
-        <!-- <li class="layui-nav-item">
+        <li class="layui-nav-item">
             <a href="javascript:;" id="hearthstoneAi">HearthstoneAi设置</a>
-        </li> -->
+        </li>
         <li class="layui-nav-item">
             <a href="javascript:;" id="shortcutKey">快捷键展示</a>
         </li>
@@ -823,13 +823,6 @@
         <div id="hearthstoneAiContent" style="display: none;">
             <form class="layui-form layui-form-pane" action="" lay-filter="hearthstoneAiForm">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">是否启用插件</label>
-                    <div class="layui-input-inline">
-                        <select name="enablePlugin" lay-verify="required" lay-filter="hearthstoneAiSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
                     <label class="layui-form-label">挂机卡组</label>
                     <div class="layui-input-inline layui-input-wrap">
                         <input type="text" name="customDeck" id="customDeck" lay-verify="required" autocomplete="off"
@@ -839,16 +832,18 @@
                     <div class="layui-input-inline">
                         <select name="customGameMode" lay-verify="required" lay-filter="hearthstoneAiSelect">
                             <option value="">请选择游戏模式</option>
-                            <option value="VFT_CASUAL">VFT_CASUAL</option>
-                            <option value="VFT_STANDARD" selected>VFT_STANDARD</option>
-                            <option value="VFT_WILD">VFT_WILD</option>
-                            <option value="VFT_TWIST">VFT_TWIST</option>
+                            <option value="VFT_CASUAL">休闲</option>
+                            <option value="VFT_STANDARD" selected>标准</option>
+                            <option value="VFT_WILD">狂野</option>
+                            <option value="VFT_TWIST">幻变</option>
                         </select>
                     </div>
                     <label class="layui-form-label">日志自动刷新</label>
                     <div class="layui-input-inline">
                         <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshAiSwitch" title="开启|关闭">
                     </div>
+
+                    <button id="runOrStop" type="button" style="float: right;" class="layui-btn">开始运行</button>
                 </div>
             </form>
 
@@ -1011,7 +1006,7 @@
         //初始调用
         checkHearthstoneStatus();
         initConfigData();
-        //initAiConfigData();
+        initAiConfigData();
 
         $('#general').click(function (event) {
             event.preventDefault();
@@ -1028,6 +1023,8 @@
             $('#hearthstoneAiContent').show();
             $('#shortcutKeyContent').hide();
             $('#logsContent').hide();
+            initAiConfigData();
+            fetchHearthstoneAiLogs(true)
         });
 
         $('#shortcutKey').click(function (event) {
@@ -1300,7 +1297,7 @@
                 }
             });
         }
-        
+
         //初始化HearthstoneAi配置信息
         function initAiConfigData() {
             var loadIndex = layer.load(1);
@@ -1408,7 +1405,7 @@
             if (!isNaN(value)) return Number(value);
             return value;
         }
-        
+
         //查询HearthstoneAi日志
         function fetchHearthstoneAiLogs(flag) {
             var loadIndex;
@@ -1416,10 +1413,10 @@
                 loadIndex = layer.load(1);
             }
             $.ajax({
-                url: `${ip}/hearthstoneai.min.log`,
+                url: `${aiIp}/hearthstoneai.min.log`,
                 method: 'GET',
                 success: function (data) {
-                    var formattedData = data.replace(/<br\s*\/?>/gi, ' ').replace(/\n/g, '<br>');
+                    var formattedData = data.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
                     $('#hearthstoneAiLogContent').html(formattedData);
                     $('#hearthstoneAiLogContent').scrollTop($('#hearthstoneAiLogContent')[0].scrollHeight);
                 },
@@ -1435,6 +1432,34 @@
                 }
             });
         }
+
+        $('#runOrStop').on('click', function() {
+            var text = $('#runOrStop').text();
+            if (text == '开始运行') {
+                $.ajax({
+                    url: `${aiIp}/run`,
+                    method: 'GET',
+                    success: function (data) {
+                        $('#runOrStop').text('停止运行');
+                        fetchHearthstoneAiLogs(true)
+                    },
+                    error: function () {
+                        layer.msg('无法访问服务器，连接断开或服务器已关闭！');
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: `${aiIp}/stop`,
+                    method: 'GET',
+                    success: function (data) {
+                        $('#runOrStop').text('开始运行');
+                    },
+                    error: function () {
+                        layer.msg('无法访问服务器，连接断开或服务器已关闭！');
+                    }
+                });
+            }
+        })
     })
 </script>
 
