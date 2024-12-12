@@ -838,6 +838,14 @@
                             <option value="VFT_TWIST">幻变</option>
                         </select>
                     </div>
+                    <label class="layui-form-label">机器码</label>
+                    <div class="layui-input-inline layui-input-wrap">
+                        <input type="text" name="machineCode" id="machineCode" lay-verify="required" autocomplete="off"
+                            class="layui-input" value="" disabled>
+                    </div>
+                    <div class="layui-input-inline layui-input-wrap" style="width: 40px !important;">
+                        <button type="button" class="layui-btn layui-btn-xs" id="copyMachineCode">复制</button>
+                    </div>
                     <label class="layui-form-label">日志自动刷新</label>
                     <div class="layui-input-inline">
                         <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshAiSwitch" title="开启|关闭">
@@ -1043,6 +1051,17 @@
             form.render(null, 'logForm');
             fetchLogs(true)
         });
+
+        $('#copyMachineCode').click(function (event) {
+            event.preventDefault();
+            var machineCode = $('#machineCode').val(); // 获取输入框的值
+            var tempInput = $('<input>'); // 创建一个临时输入框
+            $('body').append(tempInput); // 将临时输入框添加到body中
+            tempInput.val(machineCode).select(); // 设置临时输入框的值并选中
+            document.execCommand('copy'); // 执行复制命令
+            tempInput.remove(); // 移除临时输入框
+            layer.msg('机器码已复制到剪贴板！');
+        })
 
         //查询日志
         function fetchLogs(flag) {
