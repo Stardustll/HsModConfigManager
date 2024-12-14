@@ -22,21 +22,23 @@
         }
 
         #generalContent {
-            height: 88vh;
+            height: 90vh;
             overflow-y: auto;
         }
 
         #hearthstoneAiContent {
-            height: 87vh;
+            height: 89vh;
             overflow-y: auto;
             padding: 10px;
         }
 
         #hearthstoneAiLogContent {
-            height: 75vh;
+            height: 57vh;
             overflow-y: auto;
             border: 1px solid #ccc;
             padding: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
         }
 
         #shortcutKeyContent {
@@ -63,6 +65,14 @@
         .status-win {
             color: #16b777;
         }
+
+        p {
+            white-space: nowrap;
+        }
+
+        .inputDiv {
+            width: calc(100% - 129px) !important;
+        }
     </style>
 </head>
 
@@ -86,769 +96,1022 @@
     <div id="content">
         <div id="generalContent">
             <form class="layui-form layui-form-pane" action="" lay-filter="configForm">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">在线pid</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="pid" id="pid" autocomplete="off" class="layui-input" disabled>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">在线pid</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="pid" id="pid" autocomplete="off" class="layui-input" disabled>
+                        </div>
                     </div>
-                    <label class="layui-form-label">游戏内消息</label>
-                    <div class="layui-input-inline">
-                        <select name="游戏内消息" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">游戏内消息</label>
+                        <div class="layui-input-inline">
+                            <select name="游戏内消息" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">显示弹窗</label>
-                    <div class="layui-input-inline">
-                        <select name="弹出消息" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">显示弹窗</label>
+                        <div class="layui-input-inline">
+                            <select name="弹出消息" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">弹窗响应</label>
-                    <div class="layui-input-inline">
-                        <select name="弹出响应" lay-verify="required" lay-filter="configSelect">
-                            <option value="OK">OK</option>
-                            <option value="CONFIRM">CONFIRM</option>
-                            <option value="CANCEL">CANCEL</option>
-                            <option value="YES">YES</option>
-                            <option value="DONOTHING" selected>DONOTHING</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">应用焦点</label>
-                    <div class="layui-input-inline">
-                        <select name="应用焦点" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">结算展示</label>
-                    <div class="layui-input-inline">
-                        <select name="结算展示" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">自动开盒</label>
-                    <div class="layui-input-inline">
-                        <select name="自动开盒" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">报错退出</label>
-                    <div class="layui-input-inline">
-                        <select name="报错退出" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">弹窗响应</label>
+                        <div class="layui-input-inline">
+                            <select name="弹出响应" lay-verify="required" lay-filter="configSelect">
+                                <option value="OK">OK</option>
+                                <option value="CONFIRM">CONFIRM</option>
+                                <option value="CANCEL">CANCEL</option>
+                                <option value="YES">YES</option>
+                                <option value="DONOTHING" selected>DONOTHING</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">显示卡牌数量</label>
-                    <div class="layui-input-inline">
-                        <select name="收藏卡牌数量" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">应用焦点</label>
+                        <div class="layui-input-inline">
+                            <select name="应用焦点" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">显示卡牌ID</label>
-                    <div class="layui-input-inline">
-                        <select name="显示卡牌ID" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">结算展示</label>
+                        <div class="layui-input-inline">
+                            <select name="结算展示" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">移除分享检测</label>
-                    <div class="layui-input-inline">
-                        <select name="卡组分享代码检测" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">自动开盒</label>
+                        <div class="layui-input-inline">
+                            <select name="自动开盒" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">0-0显示放弃</label>
-                    <div class="layui-input-inline">
-                        <select name="显示放弃" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">无操作掉线</label>
-                    <div class="layui-input-inline">
-                        <select name="允许掉线" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">佣兵自动领奖</label>
-                    <div class="layui-input-inline">
-                        <select name="自动领奖" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">佣兵战斗缩放</label>
-                    <div class="layui-input-inline">
-                        <select name="允许缩放" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">钻石皮肤替换</label>
-                    <div class="layui-input-inline">
-                        <select name="钻石皮肤替换" lay-verify="required" lay-filter="configSelect">
-                            <option value="Default" selected>Default</option>
-                            <option value="OnlyMy">OnlyMy</option>
-                            <option value="All">All</option>
-                            <option value="Disabled">Disabled</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">报错退出</label>
+                        <div class="layui-input-inline">
+                            <select name="报错退出" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">随机皮肤</label>
-                    <div class="layui-input-inline">
-                        <select name="随机皮肤" lay-verify="required" lay-filter="configSelect">
-                            <option value="Default" selected>Default</option>
-                            <option value="OnlyMy">OnlyMy</option>
-                            <option value="All">All</option>
-                            <option value="Disabled">Disabled</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">显示卡牌数量</label>
+                        <div class="layui-input-inline">
+                            <select name="收藏卡牌数量" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">是否启用插件</label>
-                    <div class="layui-input-inline">
-                        <select name="HsMod状态" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">显示卡牌ID</label>
+                        <div class="layui-input-inline">
+                            <select name="显示卡牌ID" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">插件首选语言</label>
-                    <div class="layui-input-inline">
-                        <select name="HsMod语言" lay-verify="required" lay-filter="configSelect" lay-search>
-                            <option value="enUS">enUS</option>
-                            <option value="enGB">enGB</option>
-                            <option value="frFR">frFR</option>
-                            <option value="deDE">deDE</option>
-                            <option value="koKR">koKR</option>
-                            <option value="esES">esES</option>
-                            <option value="esMX">esMX</option>
-                            <option value="ruRU">ruRU</option>
-                            <option value="zhTW">zhTW</option>
-                            <option value="zhCN" selected>zhCN</option>
-                            <option value="itIT">itIT</option>
-                            <option value="ptBR">ptBR</option>
-                            <option value="plPL">plPL</option>
-                            <option value="jaJP">jaJP</option>
-                            <option value="thTH">thTH</option>
-                            <option value="UNKNOWN">UNKNOWN</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">移除分享检测</label>
+                        <div class="layui-input-inline">
+                            <select name="卡组分享代码检测" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">配置运行模板</label>
-                    <div class="layui-input-inline">
-                        <select name="设置模板" lay-verify="required" lay-filter="configSelect">
-                            <option value="DoNothing" selected>DoNothing</option>
-                            <option value="AwayFromKeyboard">AwayFromKeyboard</option>
-                            <option value="AntiAwayFromKeyboard">AntiAwayFromKeyboard</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">0-0显示放弃</label>
+                        <div class="layui-input-inline">
+                            <select name="显示放弃" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">启用快捷键</label>
-                    <div class="layui-input-inline">
-                        <select name="快捷键状态" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">无操作掉线</label>
+                        <div class="layui-input-inline">
+                            <select name="允许掉线" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">启用变速齿轮</label>
-                    <div class="layui-input-inline">
-                        <select name="变速齿轮状态" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">佣兵自动领奖</label>
+                        <div class="layui-input-inline">
+                            <select name="自动领奖" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">变速齿轮倍速</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="变速倍率" id="变速倍率" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="-1" lay-filter="configNum">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">佣兵战斗缩放</label>
+                        <div class="layui-input-inline">
+                            <select name="允许缩放" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">显示FPS</label>
-                    <div class="layui-input-inline">
-                        <select name="显示FPS" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">游戏帧率</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="游戏帧率" id="游戏帧率" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="-1" lay-filter="configNum">
-                    </div>
-                    <label class="layui-form-label">自动举报</label>
-                    <div class="layui-input-inline">
-                        <select name="自动举报" lay-verify="required" lay-filter="configSelect">
-                            <option value="">请选择自动举报</option>
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">观战展示卡牌</label>
-                    <div class="layui-input-inline">
-                        <select name="观战展示卡牌" lay-verify="required" lay-filter="configSelect">
-                            <option value="">请选择观战展示卡牌</option>
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">开包加速</label>
-                    <div class="layui-input-inline">
-                        <select name="开包加速" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">钻石皮肤替换</label>
+                        <div class="layui-input-inline">
+                            <select name="钻石皮肤替换" lay-verify="required" lay-filter="configSelect">
+                                <option value="Default" selected>Default</option>
+                                <option value="OnlyMy">OnlyMy</option>
+                                <option value="All">All</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">开完全部卡包</label>
-                    <div class="layui-input-inline">
-                        <select name="自动开包" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">随机皮肤</label>
+                        <div class="layui-input-inline">
+                            <select name="随机皮肤" lay-verify="required" lay-filter="configSelect">
+                                <option value="Default" selected>Default</option>
+                                <option value="OnlyMy">OnlyMy</option>
+                                <option value="All">All</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">自动分解全额</label>
-                    <div class="layui-input-inline">
-                        <select name="自动分解" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">是否启用插件</label>
+                        <div class="layui-input-inline">
+                            <select name="HsMod状态" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">炉石日志</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="炉石日志" id="炉石日志" lay-verify="required" autocomplete="off"
-                            class="layui-input" value="C:/Program Files (x86)/Hearthstone/Hearthstone_Data/../Logs"
-                            lay-filter="configText">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">插件首选语言</label>
+                        <div class="layui-input-inline">
+                            <select name="HsMod语言" lay-verify="required" lay-filter="configSelect" lay-search>
+                                <option value="enUS">enUS</option>
+                                <option value="enGB">enGB</option>
+                                <option value="frFR">frFR</option>
+                                <option value="deDE">deDE</option>
+                                <option value="koKR">koKR</option>
+                                <option value="esES">esES</option>
+                                <option value="esMX">esMX</option>
+                                <option value="ruRU">ruRU</option>
+                                <option value="zhTW">zhTW</option>
+                                <option value="zhCN" selected>zhCN</option>
+                                <option value="itIT">itIT</option>
+                                <option value="ptBR">ptBR</option>
+                                <option value="plPL">plPL</option>
+                                <option value="jaJP">jaJP</option>
+                                <option value="thTH">thTH</option>
+                                <option value="UNKNOWN">UNKNOWN</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">对局日志</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="对局日志" id="对局日志" lay-verify="required" autocomplete="off"
-                            class="layui-input" value="BepInEx/HsMatch.log" lay-filter="configText">
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">定时退出</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="定时退出" id="定时退出" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="0" lay-filter="configNum">
-                    </div>
-                    <label class="layui-form-label">模拟开包状态</label>
-                    <div class="layui-input-inline">
-                        <select name="模拟开包状态" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">冒险购买</label>
-                    <div class="layui-input-inline">
-                        <select name="冒险购买" lay-verify="required" lay-filter="configSelect">
-                            <option value="DoNothing" selected>DoNothing</option>
-                            <option value="BuyNAX">BuyNAX</option>
-                            <option value="BuyBRM">BuyBRM</option>
-                            <option value="BuyLOE">BuyLOE</option>
-                            <option value="BuyKara">BuyKara</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">卡拉赞修复</label>
-                    <div class="layui-input-inline">
-                        <select name="卡拉赞修复" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">配置运行模板</label>
+                        <div class="layui-input-inline">
+                            <select name="设置模板" lay-verify="required" lay-filter="configSelect">
+                                <option value="DoNothing" selected>DoNothing</option>
+                                <option value="AwayFromKeyboard">AwayFromKeyboard</option>
+                                <option value="AntiAwayFromKeyboard">AntiAwayFromKeyboard</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">网站端口</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="网站端口" id="网站端口" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="58744" disabled>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">启用快捷键</label>
+                        <div class="layui-input-inline">
+                            <select name="快捷键状态" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">网页背景图</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="网页背景图" id="网页背景图" lay-verify="required" autocomplete="off"
-                            class="layui-input" value="https://imgapi.cn/cos.php" lay-filter="configText">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">启用变速齿轮</label>
+                        <div class="layui-input-inline">
+                            <select name="变速齿轮状态" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">Webshell</label>
-                    <div class="layui-input-inline">
-                        <select name="Webshell" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">变速齿轮倍速</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="变速倍率" id="变速倍率" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
                     </div>
-                    <label class="layui-form-label">内部模式</label>
-                    <div class="layui-input-inline">
-                        <select name="内部模式" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">设备模拟模板</label>
-                    <div class="layui-input-inline">
-                        <select name="设备模拟模板" lay-verify="required" lay-filter="configSelect">
-                            <option value="Default" selected>Default</option>
-                            <option value="iPad">iPad</option>
-                            <option value="iPhone">iPhone</option>
-                            <option value="Phone">Phone</option>
-                            <option value="Tablet">Tablet</option>
-                            <option value="HuaweiPhone">HuaweiPhone</option>
-                            <option value="Custom">Custom</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">设备模拟系统</label>
-                    <div class="layui-input-inline">
-                        <select name="设备模拟系统" lay-verify="required" lay-filter="configSelect">
-                            <option value="PC" selected>PC</option>
-                            <option value="Mac">Mac</option>
-                            <option value="iOS">iOS</option>
-                            <option value="Android">Android</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">设备屏幕大小</label>
-                    <div class="layui-input-inline">
-                        <select name="设备屏幕大小" lay-verify="required" lay-filter="configSelect">
-                            <option value="Phone" selected>Phone</option>
-                            <option value="MiniTablet">MiniTablet</option>
-                            <option value="Tablet">Tablet</option>
-                            <option value="PC">PC</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">设备型号</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="设备设备型号" id="设备设备型号" lay-verify="required" autocomplete="off"
-                            class="layui-input" value="HsMod" lay-filter="configText">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">显示FPS</label>
+                        <div class="layui-input-inline">
+                            <select name="显示FPS" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">模拟卡包数量</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="数量" id="数量" lay-verify="number" autocomplete="off" class="layui-input"
-                            value="233" lay-filter="configNum">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">游戏帧率</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="游戏帧率" id="游戏帧率" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
                     </div>
-                    <label class="layui-form-label">类型</label>
-                    <div class="layui-input-inline">
-                        <select name="类型" lay-verify="required" lay-filter="configSelect" lay-search>
-                            <option value="INVALID">INVALID</option>
-                            <option value="CLASSIC">CLASSIC</option>
-                            <option value="GOBLINS_VS_GNOMES">GOBLINS_VS_GNOMES</option>
-                            <option value="THE_GRAND_TOURNAMENT">THE_GRAND_TOURNAMENT</option>
-                            <option value="OLD_GODS">OLD_GODS</option>
-                            <option value="FIRST_PURCHASE_OLD">FIRST_PURCHASE_OLD</option>
-                            <option value="SIGNUP_INCENTIVE">SIGNUP_INCENTIVE</option>
-                            <option value="MEAN_STREETS">MEAN_STREETS</option>
-                            <option value="UNGORO">UNGORO</option>
-                            <option value="FROZEN_THRONE">FROZEN_THRONE</option>
-                            <option value="GOLDEN_CLASSIC_PACK" selected>GOLDEN_CLASSIC_PACK</option>
-                            <option value="KOBOLDS_AND_CATACOMBS">KOBOLDS_AND_CATACOMBS</option>
-                            <option value="WITCHWOOD">WITCHWOOD</option>
-                            <option value="THE_BOOMSDAY_PROJECT">THE_BOOMSDAY_PROJECT</option>
-                            <option value="RASTAKHANS_RUMBLE">RASTAKHANS_RUMBLE</option>
-                            <option value="MAMMOTH_BUNDLE">MAMMOTH_BUNDLE</option>
-                            <option value="DALARAN">DALARAN</option>
-                            <option value="ULDUM">ULDUM</option>
-                            <option value="FIRST_PURCHASE">FIRST_PURCHASE</option>
-                            <option value="DRAGONS">DRAGONS</option>
-                            <option value="BLACK_TEMPLE">BLACK_TEMPLE</option>
-                            <option value="SCHOLOMANCE">SCHOLOMANCE</option>
-                            <option value="STANDARD_HUNTER">STANDARD_HUNTER</option>
-                            <option value="YEAR_OF_DRAGON">YEAR_OF_DRAGON</option>
-                            <option value="STANDARD_MAGE">STANDARD_MAGE</option>
-                            <option value="THE_BARRENS">THE_BARRENS</option>
-                            <option value="STORMWIND">STORMWIND</option>
-                            <option value="GOLDEN_SCHOLOMANCE">GOLDEN_SCHOLOMANCE</option>
-                            <option value="DARKMOON_FAIRE">DARKMOON_FAIRE</option>
-                            <option value="MERCENARIES">MERCENARIES</option>
-                            <option value="STANDARD_DRUID">STANDARD_DRUID</option>
-                            <option value="STANDARD_PALADIN">STANDARD_PALADIN</option>
-                            <option value="STANDARD_WARRIOR">STANDARD_WARRIOR</option>
-                            <option value="STANDARD_PRIEST">STANDARD_PRIEST</option>
-                            <option value="STANDARD_ROGUE">STANDARD_ROGUE</option>
-                            <option value="STANDARD_SHAMAN">STANDARD_SHAMAN</option>
-                            <option value="STANDARD_WARLOCK">STANDARD_WARLOCK</option>
-                            <option value="STANDARD_DEMONHUNTER">STANDARD_DEMONHUNTER</option>
-                            <option value="GOLDEN_DARKMOON_FAIRE">GOLDEN_DARKMOON_FAIRE</option>
-                            <option value="ALTERAC_VALLEY">ALTERAC_VALLEY</option>
-                            <option value="GOLDEN_THE_BARRENS">GOLDEN_THE_BARRENS</option>
-                            <option value="YEAR_OF_PHOENIX">YEAR_OF_PHOENIX</option>
-                            <option value="THE_SUNKEN_CITY">THE_SUNKEN_CITY</option>
-                            <option value="STANDARD_PACK">STANDARD_PACK</option>
-                            <option value="WILD_PACK">WILD_PACK</option>
-                            <option value="GOLDEN_STANDARD_PACK">GOLDEN_STANDARD_PACK</option>
-                            <option value="REVENDRETH">REVENDRETH</option>
-                            <option value="STORMWIND_GOLDEN">STORMWIND_GOLDEN</option>
-                            <option value="TITANS">TITANS</option>
-                            <option value="RETURN_OF_THE_LICH_KING">RETURN_OF_THE_LICH_KING</option>
-                            <option value="ALTERAC_VALLEY_GOLDEN">ALTERAC_VALLEY_GOLDEN</option>
-                            <option value="BATTLE_OF_THE_BANDS">BATTLE_OF_THE_BANDS</option>
-                            <option value="CAVERNS_OF_TIME">CAVERNS_OF_TIME</option>
-                            <option value="PATH_OF_ARTHAS">PATH_OF_ARTHAS</option>
-                            <option value="WILD_WEST">WILD_WEST</option>
-                            <option value="GOLDEN_FESTIVAL_OF_LEGENDS">GOLDEN_FESTIVAL_OF_LEGENDS</option>
-                            <option value="WHIZBANGS_WORKSHOP">WHIZBANGS_WORKSHOP</option>
-                            <option value="ISLAND_VACATION">ISLAND_VACATION</option>
-                            <option value="WILD_WEST2">WILD_WEST2</option>
-                            <option value="SPACE">SPACE</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">自动举报</label>
+                        <div class="layui-input-inline">
+                            <select name="自动举报" lay-verify="required" lay-filter="configSelect">
+                                <option value="">请选择自动举报</option>
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">随机结果</label>
-                    <div class="layui-input-inline">
-                        <select name="随机结果" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">观战展示卡牌</label>
+                        <div class="layui-input-inline">
+                            <select name="观战展示卡牌" lay-verify="required" lay-filter="configSelect">
+                                <option value="">请选择观战展示卡牌</option>
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">随机稀有度</label>
-                    <div class="layui-input-inline">
-                        <select name="随机稀有度" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">开包加速</label>
+                        <div class="layui-input-inline">
+                            <select name="开包加速" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">随机品质</label>
-                    <div class="layui-input-inline">
-                        <select name="随机品质" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">开完全部卡包</label>
+                        <div class="layui-input-inline">
+                            <select name="自动开包" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">随机其他特效</label>
-                    <div class="layui-input-inline">
-                        <select name="随机其他特效" lay-verify="required" lay-filter="configSelect">
-                            <option value="">请选择随机其他特效</option>
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">自动分解全额</label>
+                        <div class="layui-input-inline">
+                            <select name="自动分解" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">稀有度类型</label>
-                    <div class="layui-input-inline">
-                        <select name="稀有度类型" lay-verify="required" lay-filter="configSelect">
-                            <option value="COMMON">COMMON</option>
-                            <option value="RARE">RARE</option>
-                            <option value="EPIC">EPIC</option>
-                            <option value="LEGENDARY" selected>LEGENDARY</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">炉石日志</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="炉石日志" id="炉石日志" lay-verify="required" autocomplete="off"
+                                class="layui-input" value="C:/Program Files (x86)/Hearthstone/Hearthstone_Data/../Logs"
+                                lay-filter="configText">
+                        </div>
                     </div>
-                    <label class="layui-form-label">品质类型</label>
-                    <div class="layui-input-inline">
-                        <select name="品质类型" lay-verify="required" lay-filter="configSelect">
-                            <option value="NORMAL">NORMAL</option>
-                            <option value="GOLDEN" selected>GOLDEN</option>
-                            <option value="DIAMOND">DIAMOND</option>
-                            <option value="SIGNATURE">SIGNATURE</option>
-                            <option value="MAX">MAX</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">追赶包卡数量</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="Catchup card num" id="Catchup card num" lay-verify="number"
-                            autocomplete="off" class="layui-input" value="-1" lay-filter="configNum">
-                    </div>
-                    <label class="layui-form-label">卡牌1</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="卡牌1" id="卡牌1" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="71984" lay-filter="configNum">
-                    </div>
-                    <label class="layui-form-label">卡牌1品质</label>
-                    <div class="layui-input-inline">
-                        <select name="卡牌1品质" lay-verify="required" lay-filter="configSelect">
-                            <option value="NORMAL">NORMAL</option>
-                            <option value="GOLDEN" selected>GOLDEN</option>
-                            <option value="DIAMOND">DIAMOND</option>
-                            <option value="SIGNATURE">SIGNATURE</option>
-                            <option value="MAX">MAX</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">卡牌2</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="卡牌2" id="卡牌2" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="71945" lay-filter="configNum">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">对局日志</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="对局日志" id="对局日志" lay-verify="required" autocomplete="off"
+                                class="layui-input" value="BepInEx/HsMatch.log" lay-filter="configText">
+                        </div>
                     </div>
                 </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">卡牌2品质</label>
-                    <div class="layui-input-inline">
-                        <select name="卡牌2品质" lay-verify="required" lay-filter="configSelect">
-                            <option value="NORMAL">NORMAL</option>
-                            <option value="GOLDEN" selected>GOLDEN</option>
-                            <option value="DIAMOND">DIAMOND</option>
-                            <option value="SIGNATURE">SIGNATURE</option>
-                            <option value="MAX">MAX</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">定时退出</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="定时退出" id="定时退出" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="0" lay-filter="configNum">
+                        </div>
                     </div>
-                    <label class="layui-form-label">卡牌3</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="卡牌3" id="卡牌3" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="73446" lay-filter="configNum">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">模拟开包状态</label>
+                        <div class="layui-input-inline">
+                            <select name="模拟开包状态" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">卡牌3品质</label>
-                    <div class="layui-input-inline">
-                        <select name="卡牌3品质" lay-verify="required" lay-filter="configSelect">
-                            <option value="NORMAL">NORMAL</option>
-                            <option value="GOLDEN" selected>GOLDEN</option>
-                            <option value="DIAMOND">DIAMOND</option>
-                            <option value="SIGNATURE">SIGNATURE</option>
-                            <option value="MAX">MAX</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">冒险购买</label>
+                        <div class="layui-input-inline">
+                            <select name="冒险购买" lay-verify="required" lay-filter="configSelect">
+                                <option value="DoNothing" selected>DoNothing</option>
+                                <option value="BuyNAX">BuyNAX</option>
+                                <option value="BuyBRM">BuyBRM</option>
+                                <option value="BuyLOE">BuyLOE</option>
+                                <option value="BuyKara">BuyKara</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">卡牌4</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="卡牌4" id="卡牌4" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="71781" lay-filter="configNum">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">卡牌4品质</label>
-                    <div class="layui-input-inline">
-                        <select name="卡牌4品质" lay-verify="required" lay-filter="configSelect">
-                            <option value="NORMAL">NORMAL</option>
-                            <option value="GOLDEN" selected>GOLDEN</option>
-                            <option value="DIAMOND">DIAMOND</option>
-                            <option value="SIGNATURE">SIGNATURE</option>
-                            <option value="MAX">MAX</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">卡牌5</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="卡牌5" id="卡牌5" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="67040" lay-filter="configNum">
-                    </div>
-                    <label class="layui-form-label">卡牌5品质</label>
-                    <div class="layui-input-inline">
-                        <select name="卡牌5品质" lay-verify="required" lay-filter="configSelect">
-                            <option value="NORMAL">NORMAL</option>
-                            <option value="GOLDEN" selected>GOLDEN</option>
-                            <option value="DIAMOND">DIAMOND</option>
-                            <option value="SIGNATURE">SIGNATURE</option>
-                            <option value="MAX">MAX</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">快速战斗</label>
-                    <div class="layui-input-inline">
-                        <select name="快速战斗" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡拉赞修复</label>
+                        <div class="layui-input-inline">
+                            <select name="卡拉赞修复" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">显示全名</label>
-                    <div class="layui-input-inline">
-                        <select name="显示全名" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">网站端口</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="网站端口" id="网站端口" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="58744" disabled>
+                        </div>
                     </div>
-                    <label class="layui-form-label">显示天梯等级</label>
-                    <div class="layui-input-inline">
-                        <select name="显示天梯等级" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">网页背景图</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="网页背景图" id="网页背景图" lay-verify="required" autocomplete="off"
+                                class="layui-input" value="https://imgapi.cn/cos.php" lay-filter="configText">
+                        </div>
                     </div>
-                    <label class="layui-form-label">卡牌追踪</label>
-                    <div class="layui-input-inline">
-                        <select name="卡牌追踪" lay-verify="required" lay-filter="configSelect">
-                            <option value="">请选择卡牌追踪</option>
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">Webshell</label>
+                        <div class="layui-input-inline">
+                            <select name="Webshell" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">卡牌揭示</label>
-                    <div class="layui-input-inline">
-                        <select name="卡牌揭示" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">跳过英雄介绍</label>
-                    <div class="layui-input-inline">
-                        <select name="跳过英雄介绍" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">表情无冷却</label>
-                    <div class="layui-input-inline">
-                        <select name="表情无冷却" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">思考表情</label>
-                    <div class="layui-input-inline">
-                        <select name="思考表情" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
-                    </div>
-                    <label class="layui-form-label">表情数量</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="表情数量" id="表情数量" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="-1" lay-filter="configNum">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">内部模式</label>
+                        <div class="layui-input-inline">
+                            <select name="内部模式" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">对手卡牌特效</label>
-                    <div class="layui-input-inline">
-                        <select name="对手卡牌特效" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">设备模拟模板</label>
+                        <div class="layui-input-inline">
+                            <select name="设备模拟模板" lay-verify="required" lay-filter="configSelect">
+                                <option value="Default" selected>Default</option>
+                                <option value="iPad">iPad</option>
+                                <option value="iPhone">iPhone</option>
+                                <option value="Phone">Phone</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="HuaweiPhone">HuaweiPhone</option>
+                                <option value="Custom">Custom</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">异画特效</label>
-                    <div class="layui-input-inline">
-                        <select name="异画特效" lay-verify="required" lay-filter="configSelect">
-                            <option value="true" selected>true</option>
-                            <option value="false">false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">设备模拟系统</label>
+                        <div class="layui-input-inline">
+                            <select name="设备模拟系统" lay-verify="required" lay-filter="configSelect">
+                                <option value="PC" selected>PC</option>
+                                <option value="Mac">Mac</option>
+                                <option value="iOS">iOS</option>
+                                <option value="Android">Android</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">金卡特效</label>
-                    <div class="layui-input-inline">
-                        <select name="金卡特效" lay-verify="required" lay-filter="configSelect">
-                            <option value="Default" selected>Default</option>
-                            <option value="OnlyMy">OnlyMy</option>
-                            <option value="All">All</option>
-                            <option value="Disabled">Disabled</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">设备屏幕大小</label>
+                        <div class="layui-input-inline">
+                            <select name="设备屏幕大小" lay-verify="required" lay-filter="configSelect">
+                                <option value="Phone" selected>Phone</option>
+                                <option value="MiniTablet">MiniTablet</option>
+                                <option value="Tablet">Tablet</option>
+                                <option value="PC">PC</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">卡牌最高特效</label>
-                    <div class="layui-input-inline">
-                        <select name="卡牌最高特效" lay-verify="required" lay-filter="configSelect">
-                            <option value="Default" selected>Default</option>
-                            <option value="OnlyMy">OnlyMy</option>
-                            <option value="All">All</option>
-                            <option value="Disabled">Disabled</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">硬币</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="硬币" id="硬币" lay-verify="number" autocomplete="off" class="layui-input"
-                            value="-1" lay-filter="configNum">
-                    </div>
-                    <label class="layui-form-label">卡背</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="卡背" id="卡背" lay-verify="number" autocomplete="off" class="layui-input"
-                            value="-1" lay-filter="configNum">
-                    </div>
-                    <label class="layui-form-label">对战面板</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="对战面板" id="对战面板" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="-1" lay-filter="configNum">
-                    </div>
-                    <label class="layui-form-label">酒馆战斗面板</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="酒馆战斗面板" id="酒馆战斗面板" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="-1" lay-filter="configNum">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">设备型号</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="设备设备型号" id="设备设备型号" lay-verify="required" autocomplete="off"
+                                class="layui-input" value="HsMod" lay-filter="configText">
+                        </div>
                     </div>
                 </div>
-
-                <div class="layui-form-item">
-                    <label class="layui-form-label">酒馆击杀特效</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="酒馆击杀特效" id="酒馆击杀特效" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="-1" lay-filter="configNum">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">模拟卡包数量</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="数量" id="数量" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="233" lay-filter="configNum">
+                        </div>
                     </div>
-                    <label class="layui-form-label">鲍勃的偏好</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="鲍勃" id="鲍勃" lay-verify="number" autocomplete="off" class="layui-input"
-                            value="-1" lay-filter="configNum">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">类型</label>
+                        <div class="layui-input-inline">
+                            <select name="类型" lay-verify="required" lay-filter="configSelect" lay-search>
+                                <option value="INVALID">INVALID</option>
+                                <option value="CLASSIC">CLASSIC</option>
+                                <option value="GOBLINS_VS_GNOMES">GOBLINS_VS_GNOMES</option>
+                                <option value="THE_GRAND_TOURNAMENT">THE_GRAND_TOURNAMENT</option>
+                                <option value="OLD_GODS">OLD_GODS</option>
+                                <option value="FIRST_PURCHASE_OLD">FIRST_PURCHASE_OLD</option>
+                                <option value="SIGNUP_INCENTIVE">SIGNUP_INCENTIVE</option>
+                                <option value="MEAN_STREETS">MEAN_STREETS</option>
+                                <option value="UNGORO">UNGORO</option>
+                                <option value="FROZEN_THRONE">FROZEN_THRONE</option>
+                                <option value="GOLDEN_CLASSIC_PACK" selected>GOLDEN_CLASSIC_PACK</option>
+                                <option value="KOBOLDS_AND_CATACOMBS">KOBOLDS_AND_CATACOMBS</option>
+                                <option value="WITCHWOOD">WITCHWOOD</option>
+                                <option value="THE_BOOMSDAY_PROJECT">THE_BOOMSDAY_PROJECT</option>
+                                <option value="RASTAKHANS_RUMBLE">RASTAKHANS_RUMBLE</option>
+                                <option value="MAMMOTH_BUNDLE">MAMMOTH_BUNDLE</option>
+                                <option value="DALARAN">DALARAN</option>
+                                <option value="ULDUM">ULDUM</option>
+                                <option value="FIRST_PURCHASE">FIRST_PURCHASE</option>
+                                <option value="DRAGONS">DRAGONS</option>
+                                <option value="BLACK_TEMPLE">BLACK_TEMPLE</option>
+                                <option value="SCHOLOMANCE">SCHOLOMANCE</option>
+                                <option value="STANDARD_HUNTER">STANDARD_HUNTER</option>
+                                <option value="YEAR_OF_DRAGON">YEAR_OF_DRAGON</option>
+                                <option value="STANDARD_MAGE">STANDARD_MAGE</option>
+                                <option value="THE_BARRENS">THE_BARRENS</option>
+                                <option value="STORMWIND">STORMWIND</option>
+                                <option value="GOLDEN_SCHOLOMANCE">GOLDEN_SCHOLOMANCE</option>
+                                <option value="DARKMOON_FAIRE">DARKMOON_FAIRE</option>
+                                <option value="MERCENARIES">MERCENARIES</option>
+                                <option value="STANDARD_DRUID">STANDARD_DRUID</option>
+                                <option value="STANDARD_PALADIN">STANDARD_PALADIN</option>
+                                <option value="STANDARD_WARRIOR">STANDARD_WARRIOR</option>
+                                <option value="STANDARD_PRIEST">STANDARD_PRIEST</option>
+                                <option value="STANDARD_ROGUE">STANDARD_ROGUE</option>
+                                <option value="STANDARD_SHAMAN">STANDARD_SHAMAN</option>
+                                <option value="STANDARD_WARLOCK">STANDARD_WARLOCK</option>
+                                <option value="STANDARD_DEMONHUNTER">STANDARD_DEMONHUNTER</option>
+                                <option value="GOLDEN_DARKMOON_FAIRE">GOLDEN_DARKMOON_FAIRE</option>
+                                <option value="ALTERAC_VALLEY">ALTERAC_VALLEY</option>
+                                <option value="GOLDEN_THE_BARRENS">GOLDEN_THE_BARRENS</option>
+                                <option value="YEAR_OF_PHOENIX">YEAR_OF_PHOENIX</option>
+                                <option value="THE_SUNKEN_CITY">THE_SUNKEN_CITY</option>
+                                <option value="STANDARD_PACK">STANDARD_PACK</option>
+                                <option value="WILD_PACK">WILD_PACK</option>
+                                <option value="GOLDEN_STANDARD_PACK">GOLDEN_STANDARD_PACK</option>
+                                <option value="REVENDRETH">REVENDRETH</option>
+                                <option value="STORMWIND_GOLDEN">STORMWIND_GOLDEN</option>
+                                <option value="TITANS">TITANS</option>
+                                <option value="RETURN_OF_THE_LICH_KING">RETURN_OF_THE_LICH_KING</option>
+                                <option value="ALTERAC_VALLEY_GOLDEN">ALTERAC_VALLEY_GOLDEN</option>
+                                <option value="BATTLE_OF_THE_BANDS">BATTLE_OF_THE_BANDS</option>
+                                <option value="CAVERNS_OF_TIME">CAVERNS_OF_TIME</option>
+                                <option value="PATH_OF_ARTHAS">PATH_OF_ARTHAS</option>
+                                <option value="WILD_WEST">WILD_WEST</option>
+                                <option value="GOLDEN_FESTIVAL_OF_LEGENDS">GOLDEN_FESTIVAL_OF_LEGENDS</option>
+                                <option value="WHIZBANGS_WORKSHOP">WHIZBANGS_WORKSHOP</option>
+                                <option value="ISLAND_VACATION">ISLAND_VACATION</option>
+                                <option value="WILD_WEST2">WILD_WEST2</option>
+                                <option value="SPACE">SPACE</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">英雄默认皮肤</label>
-                    <div class="layui-input-inline">
-                        <select name="默认英雄" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">随机结果</label>
+                        <div class="layui-input-inline">
+                            <select name="随机结果" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">英雄</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="英雄" id="英雄" lay-verify="number" autocomplete="off" class="layui-input"
-                            value="-1" lay-filter="configNum">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">随机稀有度</label>
+                        <div class="layui-input-inline">
+                            <select name="随机稀有度" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">对手英雄</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="对手英雄" id="对手英雄" lay-verify="number" autocomplete="off"
-                            class="layui-input" value="-1" lay-filter="configNum">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">随机品质</label>
+                        <div class="layui-input-inline">
+                            <select name="随机品质" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">沉默鲍勃</label>
-                    <div class="layui-input-inline">
-                        <select name="沉默鲍勃" lay-verify="required" lay-filter="configSelect">
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">随机其他特效</label>
+                        <div class="layui-input-inline">
+                            <select name="随机其他特效" lay-verify="required" lay-filter="configSelect">
+                                <option value="">请选择随机其他特效</option>
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">酒馆镀金</label>
-                    <div class="layui-input-inline">
-                        <select name="酒馆镀金" lay-verify="required" lay-filter="configSelect">
-                            <option value="">请选择酒馆镀金</option>
-                            <option value="true">true</option>
-                            <option value="false" selected>false</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">稀有度类型</label>
+                        <div class="layui-input-inline">
+                            <select name="稀有度类型" lay-verify="required" lay-filter="configSelect">
+                                <option value="COMMON">COMMON</option>
+                                <option value="RARE">RARE</option>
+                                <option value="EPIC">EPIC</option>
+                                <option value="LEGENDARY" selected>LEGENDARY</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">品质类型</label>
+                        <div class="layui-input-inline">
+                            <select name="品质类型" lay-verify="required" lay-filter="configSelect">
+                                <option value="NORMAL">NORMAL</option>
+                                <option value="GOLDEN" selected>GOLDEN</option>
+                                <option value="DIAMOND">DIAMOND</option>
+                                <option value="SIGNATURE">SIGNATURE</option>
+                                <option value="MAX">MAX</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">追赶包卡数量</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="Catchup card num" id="Catchup card num" lay-verify="number"
+                                autocomplete="off" class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌1</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="卡牌1" id="卡牌1" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="71984" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌1品质</label>
+                        <div class="layui-input-inline">
+                            <select name="卡牌1品质" lay-verify="required" lay-filter="configSelect">
+                                <option value="NORMAL">NORMAL</option>
+                                <option value="GOLDEN" selected>GOLDEN</option>
+                                <option value="DIAMOND">DIAMOND</option>
+                                <option value="SIGNATURE">SIGNATURE</option>
+                                <option value="MAX">MAX</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌2</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="卡牌2" id="卡牌2" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="71945" lay-filter="configNum">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌2品质</label>
+                        <div class="layui-input-inline">
+                            <select name="卡牌2品质" lay-verify="required" lay-filter="configSelect">
+                                <option value="NORMAL">NORMAL</option>
+                                <option value="GOLDEN" selected>GOLDEN</option>
+                                <option value="DIAMOND">DIAMOND</option>
+                                <option value="SIGNATURE">SIGNATURE</option>
+                                <option value="MAX">MAX</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌3</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="卡牌3" id="卡牌3" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="73446" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌3品质</label>
+                        <div class="layui-input-inline">
+                            <select name="卡牌3品质" lay-verify="required" lay-filter="configSelect">
+                                <option value="NORMAL">NORMAL</option>
+                                <option value="GOLDEN" selected>GOLDEN</option>
+                                <option value="DIAMOND">DIAMOND</option>
+                                <option value="SIGNATURE">SIGNATURE</option>
+                                <option value="MAX">MAX</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌4</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="卡牌4" id="卡牌4" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="71781" lay-filter="configNum">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌4品质</label>
+                        <div class="layui-input-inline">
+                            <select name="卡牌4品质" lay-verify="required" lay-filter="configSelect">
+                                <option value="NORMAL">NORMAL</option>
+                                <option value="GOLDEN" selected>GOLDEN</option>
+                                <option value="DIAMOND">DIAMOND</option>
+                                <option value="SIGNATURE">SIGNATURE</option>
+                                <option value="MAX">MAX</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌5</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="卡牌5" id="卡牌5" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="67040" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌5品质</label>
+                        <div class="layui-input-inline">
+                            <select name="卡牌5品质" lay-verify="required" lay-filter="configSelect">
+                                <option value="NORMAL">NORMAL</option>
+                                <option value="GOLDEN" selected>GOLDEN</option>
+                                <option value="DIAMOND">DIAMOND</option>
+                                <option value="SIGNATURE">SIGNATURE</option>
+                                <option value="MAX">MAX</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">快速战斗</label>
+                        <div class="layui-input-inline">
+                            <select name="快速战斗" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">显示全名</label>
+                        <div class="layui-input-inline">
+                            <select name="显示全名" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">显示天梯等级</label>
+                        <div class="layui-input-inline">
+                            <select name="显示天梯等级" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌追踪</label>
+                        <div class="layui-input-inline">
+                            <select name="卡牌追踪" lay-verify="required" lay-filter="configSelect">
+                                <option value="">请选择卡牌追踪</option>
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌揭示</label>
+                        <div class="layui-input-inline">
+                            <select name="卡牌揭示" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">跳过英雄介绍</label>
+                        <div class="layui-input-inline">
+                            <select name="跳过英雄介绍" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">表情无冷却</label>
+                        <div class="layui-input-inline">
+                            <select name="表情无冷却" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">思考表情</label>
+                        <div class="layui-input-inline">
+                            <select name="思考表情" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">表情数量</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="表情数量" id="表情数量" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">对手卡牌特效</label>
+                        <div class="layui-input-inline">
+                            <select name="对手卡牌特效" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">异画特效</label>
+                        <div class="layui-input-inline">
+                            <select name="异画特效" lay-verify="required" lay-filter="configSelect">
+                                <option value="true" selected>true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">金卡特效</label>
+                        <div class="layui-input-inline">
+                            <select name="金卡特效" lay-verify="required" lay-filter="configSelect">
+                                <option value="Default" selected>Default</option>
+                                <option value="OnlyMy">OnlyMy</option>
+                                <option value="All">All</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡牌最高特效</label>
+                        <div class="layui-input-inline">
+                            <select name="卡牌最高特效" lay-verify="required" lay-filter="configSelect">
+                                <option value="Default" selected>Default</option>
+                                <option value="OnlyMy">OnlyMy</option>
+                                <option value="All">All</option>
+                                <option value="Disabled">Disabled</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">硬币</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="硬币" id="硬币" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">卡背</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="卡背" id="卡背" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">对战面板</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="对战面板" id="对战面板" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">酒馆战斗面板</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="酒馆战斗面板" id="酒馆战斗面板" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">酒馆击杀特效</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="酒馆击杀特效" id="酒馆击杀特效" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">鲍勃的偏好</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="鲍勃" id="鲍勃" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">英雄默认皮肤</label>
+                        <div class="layui-input-inline">
+                            <select name="默认英雄" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">英雄</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="英雄" id="英雄" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">对手英雄</label>
+                        <div class="layui-input-inline layui-input-wrap">
+                            <input type="text" name="对手英雄" id="对手英雄" lay-verify="number" autocomplete="off"
+                                class="layui-input" value="-1" lay-filter="configNum">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">沉默鲍勃</label>
+                        <div class="layui-input-inline">
+                            <select name="沉默鲍勃" lay-verify="required" lay-filter="configSelect">
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">酒馆镀金</label>
+                        <div class="layui-input-inline">
+                            <select name="酒馆镀金" lay-verify="required" lay-filter="configSelect">
+                                <option value="">请选择酒馆镀金</option>
+                                <option value="true">true</option>
+                                <option value="false" selected>false</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
         <div id="hearthstoneAiContent" style="display: none;">
             <form class="layui-form layui-form-pane" action="" lay-filter="hearthstoneAiForm">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">挂机卡组</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="customDeck" id="customDeck" lay-verify="required" autocomplete="off"
-                            class="layui-input" value="" lay-filter="hearthstoneAiText">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                        <label class="layui-form-label">挂机卡组</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="customDeck" id="customDeck" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" lay-filter="hearthstoneAiText">
+                        </div>
                     </div>
-                    <label class="layui-form-label">游戏模式</label>
-                    <div class="layui-input-inline">
-                        <select name="customGameMode" lay-verify="required" lay-filter="hearthstoneAiSelect">
-                            <option value="">请选择游戏模式</option>
-                            <option value="VFT_CASUAL">休闲</option>
-                            <option value="VFT_STANDARD" selected>标准</option>
-                            <option value="VFT_WILD">狂野</option>
-                            <option value="VFT_TWIST">幻变</option>
-                        </select>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                        <label class="layui-form-label">游戏模式</label>
+                        <div class="layui-input-inline inputDiv">
+                            <select name="customGameMode" lay-verify="required" lay-filter="hearthstoneAiSelect">
+                                <option value="">请选择游戏模式</option>
+                                <option value="VFT_CASUAL">休闲</option>
+                                <option value="VFT_STANDARD" selected>标准</option>
+                                <option value="VFT_WILD">狂野</option>
+                                <option value="VFT_TWIST">幻变</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">机器码</label>
-                    <div class="layui-input-inline layui-input-wrap">
-                        <input type="text" name="machineCode" id="machineCode" lay-verify="required" autocomplete="off"
-                            class="layui-input" value="" disabled>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                        <label class="layui-form-label">机器码</label>
+                        <div class="layui-input-inline layui-input-wrap" style="width: calc(100% - 178px);">
+                            <input type="text" name="machineCode" id="machineCode" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                        <div class="layui-input-inline layui-input-wrap" style="width: 40px !important;">
+                            <button type="button" class="layui-btn layui-btn-xs" id="copyMachineCode">复制</button>
+                        </div>
                     </div>
-                    <div class="layui-input-inline layui-input-wrap" style="width: 40px !important;">
-                        <button type="button" class="layui-btn layui-btn-xs" id="copyMachineCode">复制</button>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                        <label class="layui-form-label">自动刷新</label>
+                        <div class="layui-input-inline">
+                            <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshAiSwitch"
+                                title="开启|关闭">
+                        </div>
                     </div>
-                    <label class="layui-form-label">日志自动刷新</label>
-                    <div class="layui-input-inline">
-                        <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshAiSwitch" title="开启|关闭">
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">账号资源</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="collectionInfo" id="collectionInfo" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">战令等级</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="rewardTrackData" id="rewardTrackData" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">经验信息</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="totalData" id="totalData" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">运行时间</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="runTime" id="runTime" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">对战信息</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="winInfo" id="winInfo" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">满级还差</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="fullTimeNeeded" id="fullTimeNeeded" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">版本信息</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="rewardTrackInfo" id="rewardTrackInfo" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">标准天梯</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="standardInfo" id="standardInfo" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">狂野天梯</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="wildInfo" id="wildInfo" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">幻变天梯</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="twistInfo" id="twistInfo" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -859,19 +1122,24 @@
         <div id="shortcutKeyContent" style="display: none;"></div>
         <div id="logsContent" style="display: none;">
             <form class="layui-form" action="" lay-filter="logForm">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">日志类型</label>
-                    <div class="layui-input-inline">
-                        <select id="logType" name="logType" lay-filter="logTypeSelect">
-                            <option value="bepinex.min" selected>主程序日志</option>
-                            <!-- <option value="match">匹配日志</option> -->
-                            <option value="skins">皮肤日志</option>
-                            <option value="mercenaries">佣兵日志</option>
-                        </select>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">日志类型</label>
+                        <div class="layui-input-inline">
+                            <select id="logType" name="logType" lay-filter="logTypeSelect">
+                                <option value="bepinex.min" selected>主程序日志</option>
+                                <!-- <option value="match">匹配日志</option> -->
+                                <option value="skins">皮肤日志</option>
+                                <option value="mercenaries">佣兵日志</option>
+                            </select>
+                        </div>
                     </div>
-                    <label class="layui-form-label">自动刷新</label>
-                    <div class="layui-input-inline">
-                        <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshSwitch" title="开启|关闭">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+                        <label class="layui-form-label">自动刷新</label>
+                        <div class="layui-input-inline">
+                            <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshSwitch"
+                                title="开启|关闭">
+                        </div>
                     </div>
                 </div>
             </form>
@@ -1009,6 +1277,23 @@
             "customDeck",
             "customGameMode",
             "machineCode",
+            "collectionInfo",
+            "level",
+            "xp",
+            "xpNeeded",
+            "allGetXp",
+            "allXp",
+            "allXpNeeded",
+            "allRunTime",
+            "allGetXp",
+            "fullTimeNeeded",
+            "rewardTrackInfo",
+            "wins",
+            "losses",
+            "concedes",
+            "standardInfo",
+            "wildInfo",
+            "twistInfo",
         ]
         //初始调用
         checkHearthstoneStatus();
@@ -1324,6 +1609,11 @@
                 method: 'GET',
                 success: function (response) {
                     var configObject = parseConfig(response, aiConfigArr);
+                    configObject['rewardTrackData'] = `${configObject['level']}级(${configObject['xp']}/${configObject['xpNeeded']})`
+                    configObject['totalData'] = `获取经验:${configObject['allGetXp']}    总体经验${configObject['allXp']}/${configObject['allXpNeeded']}`
+                    var totalHours = configObject['allRunTime'] / 3600.0;
+                    configObject['runTime'] = `${formatTime(configObject['allRunTime'])}    ${configObject['allGetXp'] === 0 ? 500 : Math.floor(configObject['allGetXp'] / totalHours)}/h`
+                    configObject['winInfo'] = `胜利:${configObject['wins']}    失败:${configObject['losses']}    投降:${configObject['concedes']}`
                     form.val('hearthstoneAiForm', configObject);
                     setTimeout(function () {
                         layer.close(loadIndex);
@@ -1337,6 +1627,15 @@
                     }, 300);
                 }
             });
+        }
+
+        function formatTime(seconds) {
+            var h = Math.floor(seconds / 3600);
+            var m = Math.floor((seconds % 3600) / 60);
+            var s = seconds % 3600 % 60;
+            return [h, m, s].map(function(unit) {
+                return unit < 10 ? '0' + unit : unit;
+            }).join(':');
         }
 
         //解析配置文件字符串
@@ -1434,9 +1733,10 @@
                 url: `${aiIp}/hearthstoneai.min.log`,
                 method: 'GET',
                 success: function (data) {
-                    var formattedData = data.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
-                    $('#hearthstoneAiLogContent').html(formattedData);
+                    var formattedData = data.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '</p><p>').replace(/ /g, '&nbsp;');
+                    $('#hearthstoneAiLogContent').html(`<p>${formattedData}`);
                     $('#hearthstoneAiLogContent').scrollTop($('#hearthstoneAiLogContent')[0].scrollHeight);
+                    initAiConfigData();
                 },
                 error: function () {
                     layer.msg('无法访问服务器，连接断开或服务器已关闭！');
