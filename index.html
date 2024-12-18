@@ -1033,29 +1033,6 @@
                             </select>
                         </div>
                     </div>
-                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
-                        <label class="layui-form-label">最大考虑步数</label>
-                        <div class="layui-input-inline layui-input-wrap inputDiv">
-                            <input type="text" name="maxdeep" id="maxdeep" lay-verify="required" autocomplete="off"
-                                class="layui-input" value="" lay-filter="hearthstoneAiText">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item layui-row">
-                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
-                        <label class="layui-form-label">最大计算量</label>
-                        <div class="layui-input-inline layui-input-wrap inputDiv">
-                            <input type="text" name="maxwide" id="maxwide" lay-verify="required" autocomplete="off"
-                                class="layui-input" value="" lay-filter="hearthstoneAiText">
-                        </div>
-                    </div>
-                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
-                        <label class="layui-form-label">最大保留场面</label>
-                        <div class="layui-input-inline layui-input-wrap inputDiv">
-                            <input type="text" name="maxCal" id="maxCal" lay-verify="required" autocomplete="off"
-                                class="layui-input" value="" lay-filter="hearthstoneAiText">
-                        </div>
-                    </div>
                     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label">机器码</label>
                         <div class="layui-input-inline layui-input-wrap" style="width: calc(100% - 178px);">
@@ -1068,6 +1045,20 @@
                     </div>
                 </div>
                 <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">最大考虑步数</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="maxChildren" id="maxChildren" lay-verify="required" autocomplete="off"
+                                class="layui-input" value="" lay-filter="hearthstoneAiText">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+                        <label class="layui-form-label">最大计算量</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="maxDepth" id="maxDepth" lay-verify="required" autocomplete="off"
+                                class="layui-input" value="" lay-filter="hearthstoneAiText">
+                        </div>
+                    </div>
                     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label">自动刷新</label>
                         <div class="layui-input-inline">
@@ -1075,6 +1066,8 @@
                                 title="开启|关闭">
                         </div>
                     </div>
+                </div>
+                <div class="layui-form-item layui-row">
                     <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
                         <label class="layui-form-label">账号资源</label>
                         <div class="layui-input-inline layui-input-wrap inputDiv">
@@ -1089,8 +1082,6 @@
                                 autocomplete="off" class="layui-input" value="" disabled>
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item layui-row">
                     <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
                         <label class="layui-form-label">经验信息</label>
                         <div class="layui-input-inline layui-input-wrap inputDiv">
@@ -1098,6 +1089,8 @@
                                 class="layui-input" value="" disabled>
                         </div>
                     </div>
+                </div>
+                <div class="layui-form-item layui-row">
                     <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
                         <label class="layui-form-label">运行时间</label>
                         <div class="layui-input-inline layui-input-wrap inputDiv">
@@ -1112,19 +1105,10 @@
                                 class="layui-input" value="" disabled>
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item layui-row">
                     <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
                         <label class="layui-form-label">满级还差</label>
                         <div class="layui-input-inline layui-input-wrap inputDiv">
                             <input type="text" name="fullTimeNeeded" id="fullTimeNeeded" lay-verify="required"
-                                autocomplete="off" class="layui-input" value="" disabled>
-                        </div>
-                    </div>
-                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
-                        <label class="layui-form-label">版本信息</label>
-                        <div class="layui-input-inline layui-input-wrap inputDiv">
-                            <input type="text" name="rewardTrackInfo" id="rewardTrackInfo" lay-verify="required"
                                 autocomplete="off" class="layui-input" value="" disabled>
                         </div>
                     </div>
@@ -1149,6 +1133,15 @@
                         <div class="layui-input-inline layui-input-wrap inputDiv">
                             <input type="text" name="twistInfo" id="twistInfo" lay-verify="required" autocomplete="off"
                                 class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+                        <label class="layui-form-label">版本信息</label>
+                        <div class="layui-input-inline layui-input-wrap inputDiv">
+                            <input type="text" name="rewardTrackInfo" id="rewardTrackInfo" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
                         </div>
                     </div>
                 </div>
@@ -1356,9 +1349,8 @@
             "standardInfo",
             "wildInfo",
             "twistInfo",
-            "maxdeep",
-            "maxwide",
-            "maxCal",
+            "maxChildren",
+            "maxDepth",
         ]
         //初始调用
         checkHearthstoneStatus();
@@ -1679,10 +1671,10 @@
                 success: function (response) {
                     var configObject = parseConfig(response, aiConfigArr);
                     configObject['rewardTrackData'] = `${configObject['level']}级(${configObject['xp']}/${configObject['xpNeeded']})`
-                    configObject['totalData'] = `获取经验:${configObject['allGetXp']}    总体经验:${configObject['allXp']}/${configObject['allXpNeeded']}`
+                    configObject['totalData'] = `获取经验:${configObject['allGetXp']}  总体经验:${configObject['allXp']}/${configObject['allXpNeeded']}`
                     var totalHours = configObject['allRunTime'] / 3600.0;
-                    configObject['runTime'] = `${formatTime(configObject['allRunTime'])}    ${configObject['allGetXp'] === 0 ? 500 : Math.floor(configObject['allGetXp'] / totalHours)}/h`
-                    configObject['winInfo'] = `胜利:${configObject['wins']}    失败:${configObject['losses']}    投降:${configObject['concedes']}`
+                    configObject['runTime'] = `${formatTime(configObject['allRunTime'])}  ${configObject['allGetXp'] === 0 ? 500 : Math.floor(configObject['allGetXp'] / totalHours)}/h`
+                    configObject['winInfo'] = `胜利:${configObject['wins']}  失败:${configObject['losses']}  投降:${configObject['concedes']}`
                     form.val('hearthstoneAiForm', configObject);
                     if (flag) {
                         setTimeout(function () {
@@ -1807,6 +1799,7 @@
                 method: 'GET',
                 success: function (data) {
                     editor.setValue(data);
+                    editor.refresh();
                     editor.scrollTo(null, editor.getScrollInfo().height);
                     initAiConfigData();
                 },
