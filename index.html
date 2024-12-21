@@ -31,7 +31,7 @@
             overflow-y: auto;
         }
 
-        #hearthstoneAiContent {
+        #HsAIContent {
             height: 89vh;
             overflow-y: auto;
             padding: 10px;
@@ -40,7 +40,7 @@
             font-weight: 550;
         }
 
-        #hearthstoneAiLogContent {
+        #HsAILogContent {
             height: 52vh;
             overflow-y: auto;
             border: 1px solid #ccc;
@@ -98,7 +98,7 @@
             <a href="javascript:;" id="general">HsMod设置</a>
         </li>
         <li class="layui-nav-item">
-            <a href="javascript:;" id="hearthstoneAi">HearthstoneAi设置</a>
+            <a href="javascript:;" id="HsAI">HsAI设置</a>
         </li>
         <li class="layui-nav-item">
             <a href="javascript:;" id="shortcutKey">快捷键展示</a>
@@ -1011,20 +1011,20 @@
                 </div>
             </form>
         </div>
-        <div id="hearthstoneAiContent" style="display: none;">
-            <form class="layui-form layui-form-pane" action="" lay-filter="hearthstoneAiForm">
+        <div id="HsAIContent" style="display: none;">
+            <form class="layui-form layui-form-pane" action="" lay-filter="HsAIForm">
                 <div class="layui-form-item layui-row">
                     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label">挂机卡组</label>
                         <div class="layui-input-inline layui-input-wrap inputDiv">
                             <input type="text" name="customDeck" id="customDeck" lay-verify="required"
-                                autocomplete="off" class="layui-input" value="" lay-filter="hearthstoneAiText">
+                                autocomplete="off" class="layui-input" value="" lay-filter="HsAIText">
                         </div>
                     </div>
                     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label">游戏模式</label>
                         <div class="layui-input-inline inputDiv">
-                            <select name="customGameMode" lay-verify="required" lay-filter="hearthstoneAiSelect">
+                            <select name="customGameMode" lay-verify="required" lay-filter="HsAISelect">
                                 <option value="">请选择游戏模式</option>
                                 <option value="VFT_CASUAL">休闲</option>
                                 <option value="VFT_STANDARD" selected>标准</option>
@@ -1048,22 +1048,30 @@
                     <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
                         <label class="layui-form-label">最大考虑步数</label>
                         <div class="layui-input-inline layui-input-wrap inputDiv">
-                            <input type="text" name="maxChildren" id="maxChildren" lay-verify="required" autocomplete="off"
-                                class="layui-input" value="" lay-filter="hearthstoneAiText">
+                            <input type="text" name="maxChildren" id="maxChildren" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" lay-filter="HsAIText">
                         </div>
                     </div>
                     <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
                         <label class="layui-form-label">最大计算量</label>
                         <div class="layui-input-inline layui-input-wrap inputDiv">
                             <input type="text" name="maxDepth" id="maxDepth" lay-verify="required" autocomplete="off"
-                                class="layui-input" value="" lay-filter="hearthstoneAiText">
+                                class="layui-input" value="" lay-filter="HsAIText">
                         </div>
                     </div>
                     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
                         <label class="layui-form-label">自动刷新</label>
-                        <div class="layui-input-inline">
+                        <div class="layui-input-inline" style="width: 70px !important;">
                             <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshAiSwitch"
                                 title="开启|关闭">
+                        </div>
+                        <label class="layui-form-label">展示测试信息</label>
+                        <div class="layui-input-inline" style="width: calc(100% - 330px);">
+                            <select name="showTest" lay-verify="required" lay-filter="HsAISelect">
+                                <option value="">请选择是否展示</option>
+                                <option value="false" selected>不展示</option>
+                                <option value="true">展示</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -1351,36 +1359,37 @@
             "twistInfo",
             "maxChildren",
             "maxDepth",
+            "showTest",
         ]
         //初始调用
         checkHearthstoneStatus();
         initConfigData();
         initAiConfigData();
-        fetchHearthstoneAiLogs(true);
+        fetchHsAILogs(true);
 
         $('#general').click(function (event) {
             event.preventDefault();
             $('#generalContent').show();
-            $('#hearthstoneAiContent').hide();
+            $('#HsAIContent').hide();
             $('#shortcutKeyContent').hide();
             $('#logsContent').hide();
             initConfigData()
         });
 
-        $('#hearthstoneAi').click(function (event) {
+        $('#HsAI').click(function (event) {
             event.preventDefault();
             $('#generalContent').hide();
-            $('#hearthstoneAiContent').show();
+            $('#HsAIContent').show();
             $('#shortcutKeyContent').hide();
             $('#logsContent').hide();
             initAiConfigData();
-            fetchHearthstoneAiLogs(true)
+            fetchHsAILogs(true)
         });
 
         $('#shortcutKey').click(function (event) {
             event.preventDefault();
             $('#generalContent').hide();
-            $('#hearthstoneAiContent').hide();
+            $('#HsAIContent').hide();
             $('#shortcutKeyContent').show();
             $('#logsContent').hide();
         });
@@ -1388,7 +1397,7 @@
         $('#logs').click(function (event) {
             event.preventDefault();
             $('#generalContent').hide();
-            $('#hearthstoneAiContent').hide();
+            $('#HsAIContent').hide();
             $('#shortcutKeyContent').hide();
             $('#logsContent').show();
             $('#logType').val('bepinex.min')
@@ -1474,15 +1483,15 @@
             }
         });
 
-        //修改HearthstoneAi自动刷新
+        //修改HsAI自动刷新
         form.on('switch(refreshAiSwitch)', function (data) {
             if (data.elem.checked) {
-                layer.msg('HearthstoneAi日志自动刷新已开启');
+                layer.msg('HsAI日志自动刷新已开启');
                 intervalId = setInterval(function () {
-                    fetchHearthstoneAiLogs(false);
+                    fetchHsAILogs(false);
                 }, 5000);
             } else {
-                layer.msg('HearthstoneAi日志自动刷新已关闭');
+                layer.msg('HsAI日志自动刷新已关闭');
                 clearInterval(intervalId);
             }
         });
@@ -1514,7 +1523,7 @@
             });
         });
 
-        form.on('select(hearthstoneAiSelect)', function (data) {
+        form.on('select(HsAISelect)', function (data) {
             // 获取选择框的 name 属性和当前选中的值
             const key = data.elem.name;
             const value = data.value;
@@ -1527,10 +1536,10 @@
                 data: JSON.stringify({ key: key, value: value }),
                 success: function (response) {
                     initAiConfigData()
-                    layer.msg('HearthstoneAi数据更新成功');
+                    layer.msg('HsAI数据更新成功');
                 },
                 error: function (error) {
-                    layer.msg('HearthstoneAi数据更新失败');
+                    layer.msg('HsAI数据更新失败');
                 }
             });
         });
@@ -1591,8 +1600,8 @@
             });
         });
 
-        //监听HearthstoneAi字符串输入框
-        $('input[lay-filter="hearthstoneAiText"]').on('change', function () {
+        //监听HsAI字符串输入框
+        $('input[lay-filter="HsAIText"]').on('change', function () {
             // 获取输入框的 name 属性和当前输入的值
             const key = $(this).attr('name');
             const value = $(this).val();
@@ -1611,10 +1620,10 @@
                 data: JSON.stringify({ key: key, value: value }),
                 success: function (response) {
                     initAiConfigData();
-                    layer.msg('HearthstoneAi数据更新成功');
+                    layer.msg('HsAI数据更新成功');
                 },
                 error: function (error) {
-                    layer.msg('HearthstoneAi数据更新失败');
+                    layer.msg('HsAI数据更新失败');
                 }
             });
         });
@@ -1659,14 +1668,14 @@
             });
         }
 
-        //初始化HearthstoneAi配置信息
+        //初始化HsAI配置信息
         function initAiConfigData(flag) {
             var loadIndex;
             if (flag) {
                 loadIndex = layer.load(1);
             }
             $.ajax({
-                url: `${aiIp}/hearthstoneai.cfg`,
+                url: `${aiIp}/hsai.cfg`,
                 method: 'GET',
                 success: function (response) {
                     var configObject = parseConfig(response, aiConfigArr);
@@ -1675,7 +1684,7 @@
                     var totalHours = configObject['allRunTime'] / 3600.0;
                     configObject['runTime'] = `${formatTime(configObject['allRunTime'])}  ${configObject['allGetXp'] === 0 ? 500 : Math.floor(configObject['allGetXp'] / totalHours)}/h`
                     configObject['winInfo'] = `胜利:${configObject['wins']}  失败:${configObject['losses']}  投降:${configObject['concedes']}`
-                    form.val('hearthstoneAiForm', configObject);
+                    form.val('HsAIForm', configObject);
                     if (flag) {
                         setTimeout(function () {
                             layer.close(loadIndex);
@@ -1788,14 +1797,14 @@
             return value;
         }
 
-        //查询HearthstoneAi日志
-        function fetchHearthstoneAiLogs(flag) {
+        //查询HsAI日志
+        function fetchHsAILogs(flag) {
             var loadIndex;
             if (flag) {
                 loadIndex = layer.load(1);
             }
             $.ajax({
-                url: `${aiIp}/hearthstoneai.min.log`,
+                url: `${aiIp}/hsai.min.log`,
                 method: 'GET',
                 success: function (data) {
                     editor.setValue(data);
