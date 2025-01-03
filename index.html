@@ -1034,13 +1034,13 @@
                         </div>
                     </div>
                     <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
-                        <label class="layui-form-label">机器码</label>
-                        <div class="layui-input-inline layui-input-wrap" style="width: calc(100% - 178px);">
-                            <input type="text" name="machineCode" id="machineCode" lay-verify="required"
-                                autocomplete="off" class="layui-input" value="" disabled>
-                        </div>
-                        <div class="layui-input-inline layui-input-wrap" style="width: 40px !important;">
-                            <button type="button" class="layui-btn layui-btn-xs" id="copyMachineCode">复制</button>
+                        <label class="layui-form-label">挂机策略</label>
+                        <div class="layui-input-inline inputDiv">
+                            <select name="customBehavior" lay-verify="required" lay-filter="HsAISelect">
+                                <option value="">请选择挂机策略</option>
+                                <option value="Default" selected>默认策略</option>
+                                <option value="ShadowPriest">狂野暗牧</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -1064,14 +1064,6 @@
                         <div class="layui-input-inline" style="width: 70px !important;">
                             <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshAiSwitch"
                                 title="开启|关闭">
-                        </div>
-                        <label class="layui-form-label">展示测试信息</label>
-                        <div class="layui-input-inline" style="width: calc(100% - 330px);">
-                            <select name="showTest" lay-verify="required" lay-filter="HsAISelect">
-                                <option value="">请选择是否展示</option>
-                                <option value="false" selected>不展示</option>
-                                <option value="true">展示</option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -1150,6 +1142,28 @@
                         <div class="layui-input-inline layui-input-wrap inputDiv">
                             <input type="text" name="rewardTrackInfo" id="rewardTrackInfo" lay-verify="required"
                                 autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                        <label class="layui-form-label">机器码</label>
+                        <div class="layui-input-inline layui-input-wrap" style="width: calc(100% - 178px);">
+                            <input type="text" name="machineCode" id="machineCode" lay-verify="required"
+                                autocomplete="off" class="layui-input" value="" disabled>
+                        </div>
+                        <div class="layui-input-inline layui-input-wrap" style="width: 40px !important;">
+                            <button type="button" class="layui-btn layui-btn-xs" id="copyMachineCode">复制</button>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs12 layui-col-sm6 layui-col-md4">
+                        <label class="layui-form-label">展示测试信息</label>
+                        <div class="layui-input-inline inputDiv">
+                            <select name="showTest" lay-verify="required" lay-filter="HsAISelect">
+                                <option value="">请选择是否展示</option>
+                                <option value="false" selected>不展示</option>
+                                <option value="true">展示</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -1360,6 +1374,7 @@
             "maxChildren",
             "maxDepth",
             "showTest",
+            "customBehavior",
         ]
         //初始调用
         checkHearthstoneStatus();
