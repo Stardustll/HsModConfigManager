@@ -1068,7 +1068,7 @@
                         </div>
                         <label class="layui-form-label">游戏结束停</label>
                         <div class="layui-input-inline" style="width: 70px !important;">
-                            <input type="checkbox" name="thisGameEndStop" lay-skin="switch" lay-filter="thisGameEndStopSwitch"
+                            <input type="checkbox" id="thisGameEndStop" name="thisGameEndStop" lay-skin="switch" lay-filter="thisGameEndStopSwitch"
                                 title="开启|关闭">
                         </div>
                     </div>
@@ -1381,6 +1381,7 @@
             "maxDepth",
             "showTest",
             "customBehavior",
+            "thisGameEndStop",
         ]
         //初始调用
         checkHearthstoneStatus();
@@ -1520,12 +1521,12 @@
         form.on('switch(thisGameEndStopSwitch)', function (data) {
             if (data.elem.checked) {
                 $.ajax({
-                    url: `${ip}/config`,
+                    url: `${aiIp}/config`,
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ key: 'thisGameEndStop', value: 'true' }),
                     success: function (response) {
-                        initConfigData()
+                        initAiConfigData()
                         layer.msg('数据更新成功');
                     },
                     error: function (error) {
@@ -1534,12 +1535,12 @@
                 });
             } else {
                 $.ajax({
-                    url: `${ip}/config`,
+                    url: `${aiIp}/config`,
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ key: 'thisGameEndStop', value: 'false' }),
                     success: function (response) {
-                        initConfigData()
+                        initAiConfigData()
                         layer.msg('数据更新成功');
                     },
                     error: function (error) {
@@ -1738,6 +1739,7 @@
                     configObject['runTime'] = `${formatTime(configObject['allRunTime'])}  ${configObject['allGetXp'] === 0 ? 500 : Math.floor(configObject['allGetXp'] / totalHours)}/h`
                     configObject['winInfo'] = `胜利:${configObject['wins']}  失败:${configObject['losses']}  投降:${configObject['concedes']}`
                     form.val('HsAIForm', configObject);
+                    $('#thisGameEndStop').prop('checked', configObject['thisGameEndStop'] === 'true');
                     if (flag) {
                         setTimeout(function () {
                             layer.close(loadIndex);
