@@ -1066,6 +1066,11 @@
                             <input type="checkbox" name="open" lay-skin="switch" lay-filter="refreshAiSwitch"
                                 title="开启|关闭">
                         </div>
+                        <label class="layui-form-label">游戏结束停</label>
+                        <div class="layui-input-inline" style="width: 70px !important;">
+                            <input type="checkbox" name="thisGameEndStop" lay-skin="switch" lay-filter="thisGameEndStopSwitch"
+                                title="开启|关闭">
+                        </div>
                     </div>
                 </div>
                 <div class="layui-form-item layui-row">
@@ -1509,6 +1514,38 @@
             } else {
                 layer.msg('HsAI日志自动刷新已关闭');
                 clearInterval(intervalId);
+            }
+        });
+
+        form.on('switch(thisGameEndStopSwitch)', function (data) {
+            if (data.elem.checked) {
+                $.ajax({
+                    url: `${ip}/config`,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ key: 'thisGameEndStop', value: 'true' }),
+                    success: function (response) {
+                        initConfigData()
+                        layer.msg('数据更新成功');
+                    },
+                    error: function (error) {
+                        layer.msg('数据更新失败');
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: `${ip}/config`,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ key: 'thisGameEndStop', value: 'false' }),
+                    success: function (response) {
+                        initConfigData()
+                        layer.msg('数据更新成功');
+                    },
+                    error: function (error) {
+                        layer.msg('数据更新失败');
+                    }
+                });
             }
         });
 
