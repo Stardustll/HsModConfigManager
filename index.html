@@ -84,6 +84,9 @@
         <li class="layui-nav-item">
             <a href="javascript:;" id="logs">日志</a>
         </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;" id="returnHsMod">返回HsMod</a>
+        </li>
     </ul>
 
     <div id="content">
@@ -1193,6 +1196,12 @@
             form.render(null, 'logForm');
             fetchLogs(true)
         });
+
+        $('#returnHsMod').click(function (event) {
+            event.preventDefault();
+            // 返回HsMod页面
+            window.location.href = 'http://localhost:58744';
+        })
 
         //查询日志
         function fetchLogs(flag) {
